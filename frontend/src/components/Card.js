@@ -14,8 +14,8 @@ function Card(props){
 
     //лайки
     const isLiked = props.card.likes?.some((i) => i === currentUser._id);
-    const cardLikeButtonClassName = ( 
-        `elements__heart ${isLiked && 'elements__heart_active'}` 
+    const cardLikeButtonClassName = (
+        `elements__heart ${isLiked && 'elements__heart_active'}`
     );
     const handleLike = () => {
         props.onCardLike(props.card);
@@ -28,7 +28,7 @@ function Card(props){
     return(
         <div className="elements__card">
             <img src={props.card.link} className="elements__image" alt={props.card.name} onClick={handleImgClick} />
-            {isOwn && <button className='elements__delete' onClick={handleDeleteClick} />} 
+            {isOwn && <button className="elements__delete" onClick={handleDeleteClick} />}
             <div className="elements__string">
                 <h2 className="elements__text" >{props.card.name}</h2>
                 <div className="elements__container">

@@ -10,12 +10,12 @@ export class Api {
         }
         return Promise.reject(`Произошла ошибка ${res.status}`);
     }
-    
+
     // получение данных о пользователе (мне)
     getUserInfo(){
         return fetch(`${this._url}/users/me`, {
-            method: "GET",
-            credentials: "include",
+            method: 'GET',
+            credentials: 'include',
             headers: this._headers
         })
         .then(res => this._response(res))
@@ -24,8 +24,8 @@ export class Api {
     // загрузка новых данных пользователя
     putUserInfo(person){
         return fetch(`${this._url}/users/me`, {
-            method: "PATCH",
-            credentials: "include",
+            method: 'PATCH',
+            credentials: 'include',
             headers: this._headers,
             body: JSON.stringify({
                 name: person.name,
@@ -37,8 +37,8 @@ export class Api {
 
     putUserAvatar(data) {
         return fetch(`${this._url}/users/me/avatar`, {
-            method: "PATCH",
-            credentials: "include",
+            method: 'PATCH',
+            credentials: 'include',
             headers: this._headers,
             body: JSON.stringify({
                 avatar: data.avatar
@@ -50,8 +50,8 @@ export class Api {
     // получение карточек
     getInitialCards() {
         return fetch(`${this._url}/cards`, {
-            method: "GET",
-            credentials: "include",
+            method: 'GET',
+            credentials: 'include',
             headers: this._headers
         })
         .then(res => this._response(res))
@@ -60,8 +60,8 @@ export class Api {
     // добавление карточки
     addCard(card){
         return fetch(`${this._url}/cards`, {
-            method: "POST",
-            credentials: "include",
+            method: 'POST',
+            credentials: 'include',
             headers: this._headers,
             body: JSON.stringify({
                 name: card.name,
@@ -73,8 +73,8 @@ export class Api {
 
     deleteCard(cardId){
         return fetch(`${this._url}/cards/${cardId}`, {
-            method: "DELETE",
-            credentials: "include",
+            method: 'DELETE',
+            credentials: 'include',
             headers: this._headers
         })
         .then(res => this._response(res))
@@ -82,8 +82,8 @@ export class Api {
 
     likeCard(cardId){
         return fetch(`${this._url}/cards/${cardId}/likes`, {
-            method: "PUT",
-            credentials: "include",
+            method: 'PUT',
+            credentials: 'include',
             headers: this._headers
         })
         .then(res => this._response(res))
@@ -91,13 +91,13 @@ export class Api {
 
     unlikeCard(cardId){
         return fetch(`${this._url}/cards/${cardId}/likes`, {
-            method: "DELETE",
-            credentials: "include",
+            method: 'DELETE',
+            credentials: 'include',
             headers: this._headers
         })
         .then(res => this._response(res))
     }
-    
+
 }
 
 // const api = new Api({
@@ -111,8 +111,7 @@ export class Api {
   const api = new Api({
     url: 'http://localhost:3000',
     headers: {
-      //authorization: '',
-      Accept: "application/json",
+      Accept: 'application/json',
       'Content-Type': 'application/json'
     }
   });

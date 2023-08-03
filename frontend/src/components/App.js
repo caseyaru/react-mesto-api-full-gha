@@ -128,7 +128,6 @@ function App() {
 
   //лайки
   const handleCardLike = (card) => {
-    // const isLiked = card.likes.some(i => i._id === currentUser._id);
     const isLiked = card.likes?.some((i) => i === currentUser._id);
     const method = isLiked ? api.unlikeCard(card._id) : api.likeCard(card._id);
     method
@@ -256,7 +255,7 @@ function App() {
           <Route path="/" element={loggedIn ? <Navigate to="/main" replace /> : <Navigate to="/signin" replace />} />
           <Route path="/signup" element={<Registration handleRegister={handleRegister} />} />
           <Route path="/signin" element={<Login handleLogin={handleLogin} />} />
-          <Route path="/main" element={< ProtectedRoute loggedIn={loggedIn} element={Main} 
+          <Route path="/main" element={< ProtectedRoute loggedIn={loggedIn} element={Main}
                   cards={cards}
                   onEditAvatar={handleEditAvatarClick}
                   onEditProfile={handleEditProfileClick}
@@ -270,55 +269,55 @@ function App() {
 
         {loggedIn && <Footer />}
 
-        <EditAvatarPopup 
-          isOpen={isAvatarPopupOpen} 
-          onClose={closeAllPopups} 
+        <EditAvatarPopup
+          isOpen={isAvatarPopupOpen}
+          onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
           isLoading={isLoading}
           onCloseOverlay={handleCloseOverlay}
         />
 
-        <EditProfilePopup 
-          isOpen={isEditProfilePopupOpen} 
-          onClose={closeAllPopups} 
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
           isLoading={isLoading}
           onCloseOverlay={handleCloseOverlay}
         />
 
         <AddPlacePopup
-          isOpen={isAddPopupOpen} 
-          onClose={closeAllPopups} 
+          isOpen={isAddPopupOpen}
+          onClose={closeAllPopups}
           onAddCard={handleAddPlaceSubmit}
           isLoading={isLoading}
           onCloseOverlay={handleCloseOverlay}
         />
 
-        <DeletePlacePopup 
+        <DeletePlacePopup
           isOpen={isDeletePopupOpen}
-          onClose={closeAllPopups} 
+          onClose={closeAllPopups}
           onCloseOverlay={handleCloseOverlay}
           isValid={true}
           isLoading={isLoading}
           onOK={handleCardDelete}
           card={selectedCardId}
         />
-          
-        <ImagePopup 
+
+        <ImagePopup
           card={selectedCard}
-          onClose={closeAllPopups} 
+          onClose={closeAllPopups}
           onCloseOverlay={handleCloseOverlay}
         />
 
         <InfoTooltip
-          isOpen={isPopupSuccessOpen} 
+          isOpen={isPopupSuccessOpen}
           onClose={closeAllPopups}
           title={'Вы успешно зарегистрировались!'}
           icon={iconSuccess}
         />
 
         <InfoTooltip
-          isOpen={isPopupFailOpen} 
+          isOpen={isPopupFailOpen}
           onClose={closeAllPopups}
           title={'Что-то пошло не так! Попробуйте ещё раз.'}
           icon={iconFail}

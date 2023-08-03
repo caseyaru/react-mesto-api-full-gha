@@ -5,9 +5,9 @@ function NotFoundPage(props){
     const navigate = useNavigate();
 
     return(
-        <section className={`popup popup_type_notice popup_opened`}>
-            <div className={`popup__container popup__container_type_notice`}>
-                <img className="popup__icon" src={iconFail} />
+        <section className={'popup popup_type_notice popup_opened'}>
+            <div className={'popup__container popup__container_type_notice'}>
+                <img className="popup__icon" src={iconFail} alt="Just an icon" />
                 <h3 className="popup__title">Запрашиваемая страница не найдена</h3>
                 <button className="popup__close" type="button" onClick={() => navigate('/')} />
             </div>
