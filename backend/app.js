@@ -2,9 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
-
 const cookieParser = require('cookie-parser');
-
 const { celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
 
@@ -13,7 +11,7 @@ const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.en
 
 const usersRoute = require('./routes/users');
 const cardsRoute = require('./routes/cards');
-const { createUser, login } = require('./controllers/users');
+const { createUser, login, signout } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 
 const { errorHandler } = require('./middlewares/errors');
@@ -27,6 +25,14 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(helmet());
 app.disable('x-powered-by');
+
+// крос-доменные запросы
+const cors = require('cors')
+const corsOptions = {
+  origin: ['https://localhost:3001','http://localhost:3001','localhost:3001'],
+  credentials: true,
+}
+app.use(cors(corsOptions));
 
 app.post(
   '/signup',
@@ -52,6 +58,7 @@ app.post(
   }),
   login,
 );
+app.get('/signout', signout);
 
 app.use(auth);
 
@@ -66,5 +73,5 @@ app.use(errors());
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-  console.log('Сервер жив');
+  console.log(`Сервер жив (порт ${PORT})`);
 });
