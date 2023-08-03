@@ -55,7 +55,7 @@ const login = (req, res, next) => {
 const signout = (req, res) => {
   res.clearCookie('jwt').send({ message: 'куки удалены' });
   res.end();
-}
+};
 
 const getUsers = (req, res, next) => {
   User.find({})
@@ -104,5 +104,5 @@ const updateUserAvatar = (req, res, next) => {
 };
 
 module.exports = {
-  createUser, getUsers, getUser, getMe, updateUser, updateUserAvatar, login, signout
+  createUser, getUsers, getUser, getMe, updateUser, updateUserAvatar, login, signout,
 };
