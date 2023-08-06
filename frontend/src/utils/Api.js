@@ -100,16 +100,9 @@ export class Api {
 
 }
 
-// const api = new Api({
-//     url: 'https://mesto.nomoreparties.co/v1/cohort-64',
-//     headers: {
-//       authorization: '5341efdf-0efa-4de4-9e2d-8c8a726218b1',
-//       'Content-Type': 'application/json'
-//     }
-//   });
-
   const api = new Api({
-    url: 'http://localhost:3000',
+    // url: 'http://localhost:3000',
+    url: 'http://api.casey.nomoreparties.co/',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'
