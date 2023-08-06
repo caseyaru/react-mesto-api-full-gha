@@ -7,8 +7,8 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.111.204
+IP 158.160.111.204
 
-Frontend https://...
+Frontend https://casey.nomoreparties.co
 
-Backend https://...
+Backend https://api.casey.nomoreparties.co
