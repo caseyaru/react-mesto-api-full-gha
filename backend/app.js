@@ -19,6 +19,7 @@ const usersRoute = require('./routes/users');
 const cardsRoute = require('./routes/cards');
 const { createUser, login, signout } = require('./controllers/users');
 const auth = require('./middlewares/auth');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { errorHandler } = require('./middlewares/errors');
 const NotFound = require('./errors/NotFound');
@@ -38,6 +39,8 @@ const corsOptions = {
   credentials: true,
 };
 app.use(cors(corsOptions));
+
+app.use(requestLogger);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -79,6 +82,7 @@ app.use('*', (req, res, next) => {
   next(new NotFound('Маршрут не найден'));
 });
 
+app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 
