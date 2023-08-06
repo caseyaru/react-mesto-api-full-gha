@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
 
+const { JWT } = require('../utils/config');
 const NotFound = require('../errors/NotFound');
 const NotValidData = require('../errors/NotValidData');
 const NotAllData = require('../errors/NotAllData');
@@ -37,7 +38,7 @@ const login = (req, res, next) => {
       bcrypt.compare(password, user.password)
         .then((isValidUser) => {
           if (isValidUser) {
-            const token = jwt.sign({ _id: user.id }, 'secret', { expiresIn: '7d' });
+            const token = jwt.sign({ _id: user.id }, JWT, { expiresIn: '7d' });
             res.cookie('jwt', token, {
               maxAge: 3600 * 24 * 7,
               httpOnly: true,

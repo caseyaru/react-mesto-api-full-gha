@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+require('dotenv').config();
+
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -5,11 +8,13 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
+const cors = require('cors');
+
+const { PORT, DB } = require('./utils/config');
 
 const app = express();
-const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
+// const { PORT = 3000, DB = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 
-const cors = require('cors');
 const usersRoute = require('./routes/users');
 const cardsRoute = require('./routes/cards');
 const { createUser, login, signout } = require('./controllers/users');
@@ -20,7 +25,7 @@ const NotFound = require('./errors/NotFound');
 
 const regex = /^https?:\/\/.+\.[a-z]+/;
 
-mongoose.connect(DB_URL);
+mongoose.connect(DB);
 
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -34,6 +39,11 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 app.post(
   '/signup',
   celebrate({
