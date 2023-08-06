@@ -102,7 +102,7 @@ export class Api {
 
   const api = new Api({
     // url: 'http://localhost:3000',
-    url: 'https://api.casey.nomoreparties.co/',
+    url: 'http://api.casey.nomoreparties.co/',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'
