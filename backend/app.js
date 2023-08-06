@@ -29,7 +29,7 @@ app.disable('x-powered-by');
 
 // крос-доменные запросы
 const corsOptions = {
-  origin: ['https://localhost:3001', 'http://localhost:3001', 'localhost:3001'],
+  origin: ['localhost:3001', 'https://casey.nomoreparties.co'],
   credentials: true,
 };
 app.use(cors(corsOptions));
