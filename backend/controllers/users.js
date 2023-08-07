@@ -71,7 +71,7 @@ const getUser = (req, res, next) => {
       if (user) {
         res.status(200).send(user);
       } else {
-        return new NotFound('Данные не найдены');
+        return next(new NotFound('Данные не найдены'));
       }
     })
     .catch(next);
