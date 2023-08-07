@@ -28,9 +28,6 @@ const createUser = (req, res, next) => {
 
 const login = (req, res, next) => {
   const { email, password } = req.body;
-  if (!email || !password) {
-    next(new NotValidData('Переданы не все необходимые данные'));
-  }
   User.findOne({ email })
     .select('+password')
     .orFail(() => new NotAllData('Пользователь не найден'))
@@ -87,7 +84,7 @@ const getMe = (req, res, next) => {
 const updateUser = (req, res, next) => {
   const { name, about } = req.body;
   User.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
-    .orFail(new Error('Ошибка в данных'))
+    .orFail(() => new NotAllData('Ошибка в данных'))
     .then((user) => {
       res.status(200).send(user);
     })
@@ -97,7 +94,7 @@ const updateUser = (req, res, next) => {
 const updateUserAvatar = (req, res, next) => {
   const { avatar } = req.body;
   User.findByIdAndUpdate(req.user._id, { avatar }, { new: true, runValidators: true })
-    .orFail(new Error('Ошибка в данных'))
+    .orFail(() => new NotAllData('Ошибка в данных'))
     .then((user) => {
       res.status(200).send(user);
     })

@@ -3,28 +3,27 @@ const NotValidData = require('../errors/NotValidData');
 const NotAllData = require('../errors/NotAllData');
 const NotAllowed = require('../errors/NotAllowed');
 const UserError = require('../errors/UserError');
-const ServerError = require('../errors/ServerError');
 
 const errorHandler = (err, req, res, next) => {
-  console.log(err);
+  // let error;
 
-  let error;
+  // if (err.statusCode === 404) {
+  //   error = new NotFound(err);
+  // } else if (err.statusCode === 400) {
+  //   error = new NotValidData(err);
+  // } else if (err.statusCode === 401) {
+  //   error = new NotAllData(err);
+  // } else if (err.statusCode === 403) {
+  //   error = new NotAllowed(err);
+  // } else if (err.code === 11000) {
+  //   error = new UserError(err);
+  // }
 
-  if (err.statusCode === 404) {
-    error = new NotFound(err);
-  } else if (err.statusCode === 400) {
-    error = new NotValidData(err);
-  } else if (err.statusCode === 401) {
-    error = new NotAllData(err);
-  } else if (err.statusCode === 403) {
-    error = new NotAllowed(err);
-  } else if (err.code === 11000) {
-    error = new UserError(err);
-  } else {
-    error = new ServerError(err);
-  }
+  // проверяем статус ошибки и записываем в сообщение
+  const statusCode = err.statusCode || 500;
+  const message = statusCode === 500 ? 'Ошибка на сервере' : err.message;
 
-  res.status(error.statusCode).send({ message: error.message });
+  res.status(statusCode).send(message);
 
   next();
 };

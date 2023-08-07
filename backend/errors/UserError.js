@@ -1,8 +1,7 @@
 class UserError extends Error {
-  constructor(err) {
-    super(err);
+  constructor(message) {
+    super(message);
     this.statusCode = 409;
-    this.message = 'Данный email уже зарегистрирован';
   }
 }
 

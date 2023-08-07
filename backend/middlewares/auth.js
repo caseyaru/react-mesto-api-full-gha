@@ -11,6 +11,7 @@ const auth = (req, res, next) => {
     payload = jwt.verify(token, JWT);
   } catch (err) {
     next(new NotAllData('Ошибка в токене'));
+    return;
   }
 
   req.user = payload;

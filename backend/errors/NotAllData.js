@@ -1,8 +1,7 @@
 class NotAllData extends Error {
-  constructor(err) {
-    super(err);
+  constructor(message) {
+    super(message);
     this.statusCode = 401;
-    this.message = 'Введены не все необходимые данные';
   }
 }
 
