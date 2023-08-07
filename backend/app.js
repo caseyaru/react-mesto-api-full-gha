@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
-const { celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
 const cors = require('cors');
 
@@ -20,8 +19,6 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { errorHandler } = require('./middlewares/errors');
 const NotFound = require('./errors/NotFound');
-
-// const regex = /^https?:\/\/.+\.[a-z]+/;
 
 mongoose.connect(DB);
 

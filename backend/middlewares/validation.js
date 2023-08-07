@@ -1,5 +1,4 @@
 const { celebrate, Joi } = require('celebrate');
-const { errors } = require('celebrate');
 
 const regex = /^https?:\/\/.+\.[a-z]+/;
 
