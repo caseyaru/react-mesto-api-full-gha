@@ -68,11 +68,10 @@ const getUser = (req, res, next) => {
   User.findById(userId)
     // .orFail(new NotFound('Данные не найдены'))
     .then((user) => {
-      if (user) {
-        res.status(200).send(user);
-      } else {
+      if (!user) {
         return next(new NotFound('Данные не найдены'));
       }
+      res.status(200).send(user);
     })
     .catch(next);
 };
