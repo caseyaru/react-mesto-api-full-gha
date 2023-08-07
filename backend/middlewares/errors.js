@@ -18,12 +18,15 @@ const errorHandler = (err, req, res, next) => {
   // } else if (err.code === 11000) {
   //   error = new UserError(err);
   // }
+  // const statusCode = err.statusCode || 500;
+  // const message = statusCode === 500 ? 'Ошибка на сервере' : err.message;
+  // res.status(statusCode).send(message);
 
-  // проверяем статус ошибки и записываем в сообщение
-  const statusCode = err.statusCode || 500;
-  const message = statusCode === 500 ? 'Ошибка на сервере' : err.message;
+  const { statusCode = 500, message } = err;
 
-  res.status(statusCode).send(message);
+  res.status(statusCode).send({
+    message: statusCode === 500 ? 'Ошибка на сервере' : message,
+  });
 
   next();
 };
