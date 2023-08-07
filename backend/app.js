@@ -43,38 +43,10 @@ app.get('/crash-test', () => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
-app.post(
-  '/signup',
-  // celebrate({
-  //   body: Joi.object().keys({
-  //     name: Joi.string().min(2).max(30),
-  //     about: Joi.string().min(2).max(30),
-  //     avatar: Joi.string().uri({ scheme: ['http', 'https'] }).pattern(regex),
-  //     email: Joi.string().required().email(),
-  //     password: Joi.string().required().min(8),
-  //   }),
-  // }),
-  celebrateSignUp,
-  createUser,
-);
 
-app.post(
-  '/signin',
-  // celebrate({
-  //   body: Joi.object().keys({
-  //     email: Joi.string().email().required(),
-  //     password: Joi.string().min(8).required(),
-  //   }),
-  // }),
-  celebrateSignIn,
-  login,
-);
+app.post('/signup', celebrateSignUp, createUser);
+app.post('/signin', celebrateSignIn, login);
 app.get('/signout', signout);
-
-// app.use(auth);
-
-// app.use('/users', usersRoute);
-// app.use('/cards', cardsRoute);
 
 app.use(router);
 
