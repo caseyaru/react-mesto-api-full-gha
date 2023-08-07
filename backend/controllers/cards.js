@@ -51,7 +51,11 @@ const dislikeCard = (req, res, next) => {
   )
     .orFail(new NotFound('Данные не найдены'))
     .then((card) => {
-      res.status(200).send(card);
+      if (card) {
+        res.status(200).send(card);
+      } else {
+        return new NotFound('Данные не найдены');
+      }
     })
     .catch(next);
 };
