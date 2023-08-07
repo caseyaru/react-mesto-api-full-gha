@@ -13,6 +13,7 @@ const { PORT, DB } = require('./utils/config');
 
 const app = express();
 
+const router = require('./routes/index');
 const usersRoute = require('./routes/users');
 const cardsRoute = require('./routes/cards');
 const { createUser, login, signout } = require('./controllers/users');
@@ -70,10 +71,12 @@ app.post(
 );
 app.get('/signout', signout);
 
-app.use(auth);
+// app.use(auth);
 
-app.use('/users', usersRoute);
-app.use('/cards', cardsRoute);
+// app.use('/users', usersRoute);
+// app.use('/cards', cardsRoute);
+
+app.use(router);
 
 app.use('*', (req, res, next) => {
   next(new NotFound('Маршрут не найден'));
