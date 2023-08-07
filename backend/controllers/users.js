@@ -7,6 +7,7 @@ const { JWT } = require('../utils/config');
 const NotFound = require('../errors/NotFound');
 const NotValidData = require('../errors/NotValidData');
 const NotAllData = require('../errors/NotAllData');
+const UserError = require('../errors/UserError');
 
 const createUser = (req, res, next) => {
   bcrypt.hash(String(req.body.password), 10)
@@ -21,7 +22,12 @@ const createUser = (req, res, next) => {
             email: user.email,
           });
         })
-        .catch(next);
+        .catch((err) => {
+          if (err.code === 11000) {
+            return next(new UserError('Данная почта уже используется'));
+          }
+          next(err);
+        });
     })
     .catch(next);
 };
