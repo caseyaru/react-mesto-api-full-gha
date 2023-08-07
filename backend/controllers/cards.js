@@ -36,9 +36,13 @@ const likeCard = (req, res, next) => {
     { $addToSet: { likes: req.user._id } },
     { new: true },
   )
-    .orFail(new NotFound('Данные не найдены'))
+    // .orFail(new NotFound('Данные не найдены'))
     .then((card) => {
-      res.status(200).send(card);
+      if (card) {
+        res.status(200).send(card);
+      } else {
+        return new NotFound('Данные не найдены');
+      }
     })
     .catch(next);
 };
