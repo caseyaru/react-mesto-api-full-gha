@@ -5,7 +5,6 @@ const User = require('../models/user');
 
 const { JWT } = require('../utils/config');
 const NotFound = require('../errors/NotFound');
-const NotValidData = require('../errors/NotValidData');
 const NotAllData = require('../errors/NotAllData');
 const UserError = require('../errors/UserError');
 
@@ -72,7 +71,6 @@ const getUsers = (req, res, next) => {
 const getUser = (req, res, next) => {
   const { userId } = req.params;
   User.findById(userId)
-    // .orFail(new NotFound('Данные не найдены'))
     .then((user) => {
       if (!user) {
         return next(new NotFound('Данные не найдены'));

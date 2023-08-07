@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 require('dotenv').config();
 
 const express = require('express');
@@ -13,7 +12,6 @@ const cors = require('cors');
 const { PORT, DB } = require('./utils/config');
 
 const app = express();
-// const { PORT = 3000, DB = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 
 const usersRoute = require('./routes/users');
 const cardsRoute = require('./routes/cards');
@@ -33,7 +31,6 @@ app.use(cookieParser());
 app.use(helmet());
 app.disable('x-powered-by');
 
-// крос-доменные запросы
 const corsOptions = {
   origin: ['localhost:3001', 'https://casey.nomoreparties.co'],
   credentials: true,
