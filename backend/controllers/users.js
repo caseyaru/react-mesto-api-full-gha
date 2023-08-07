@@ -73,7 +73,7 @@ const getUser = (req, res, next) => {
       }
       res.status(200).send(user);
     })
-    .catch(next);
+    .catch(next(new NotFound('Ошибка в айди')));
 };
 
 const getMe = (req, res, next) => {
