@@ -24,7 +24,7 @@ const deleteCard = (req, res, next) => {
           .then((cards) => { res.status(200).send(cards); })
           .catch(next);
       } else {
-        next(new NotAllowed('Недостаточно прав для удаления карточки'));
+        return next(new NotAllowed('Недостаточно прав для удаления карточки'));
       }
     })
     .catch(next);
